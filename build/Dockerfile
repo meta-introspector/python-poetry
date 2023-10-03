@@ -29,7 +29,6 @@ RUN apt-get update \
 RUN python -m venv ${POETRY_HOME}
 RUN ${POETRY_HOME}/bin/pip install -U pip setuptools
 RUN ${POETRY_HOME}/bin/pip install "poetry==${POETRY_VERSION}"
-
 FROM ${OFFICIAL_PYTHON_IMAGE} as production-image
 
 ENV PATH="/opt/poetry/bin:$PATH"
