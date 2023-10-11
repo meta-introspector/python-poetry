@@ -1,7 +1,7 @@
 # References: using official Python images
 # https://hub.docker.com/_/python
-ARG OFFICIAL_PYTHON_IMAGE
-FROM ${OFFICIAL_PYTHON_IMAGE} as build-stage
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} 
 ARG POETRY_VERSION
 
 LABEL maintainer="Max Pfeiffer <max@maxpfeiffer.ch>"
@@ -29,8 +29,6 @@ RUN apt-get update \
 RUN python -m venv ${POETRY_HOME}
 RUN ${POETRY_HOME}/bin/pip install -U pip setuptools
 RUN ${POETRY_HOME}/bin/pip install "poetry==${POETRY_VERSION}"
-FROM ${OFFICIAL_PYTHON_IMAGE} as production-image
 
 ENV PATH="/opt/poetry/bin:$PATH"
 
-COPY --from=build-stage /opt/poetry /opt/poetry/
